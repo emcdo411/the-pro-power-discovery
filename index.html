@@ -1,629 +1,853 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sweden Data Center Ops Intelligence Brief</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #080A10;
-      --panel: rgba(16, 19, 31, 0.86);
-      --panel-2: rgba(20, 24, 39, 0.74);
-      --line: rgba(129, 147, 255, 0.20);
-      --line-strong: rgba(129, 147, 255, 0.42);
-      --accent: #8EA2FF;
-      --accent-2: #B9C4FF;
-      --ice: #A8F0FF;
-      --green: #62D6A7;
-      --amber: #F3B45B;
-      --red: #EF7474;
-      --text: #F2F4FF;
-      --muted: #A4ABC7;
-      --dim: #69708C;
-      --shadow: 0 28px 80px rgba(0,0,0,0.44);
-      --mono: 'DM Mono', monospace;
-      --serif: 'Instrument Serif', serif;
-      --sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Power Support · DARE Operations Intelligence Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0c0d0f;
+    --surface: #131518;
+    --card: #1a1c21;
+    --border: #262930;
+    --accent: #f0c040;
+    --accent2: #ff5c38;
+    --accent3: #3de8c0;
+    --text: #dde1ea;
+    --muted: #6b7280;
+    --red: #ff4444;
+    --orange: #ff7a3d;
+    --yellow: #f0c040;
+    --green: #22d47e;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(142,162,255,0.20), transparent 30%),
-        radial-gradient(circle at 86% 12%, rgba(168,240,255,0.11), transparent 28%),
-        linear-gradient(135deg, #080A10 0%, #0B0E17 45%, #070910 100%);
-      color: var(--text);
-      font-family: var(--sans);
-      padding: 28px 16px;
-      overflow-x: hidden;
-    }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 60px,
+      rgba(240,192,64,0.015) 60px,
+      rgba(240,192,64,0.015) 61px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(142,162,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(142,162,255,0.035) 1px, transparent 1px);
-      background-size: 44px 44px;
-      mask-image: radial-gradient(circle at center, black, transparent 78%);
-      pointer-events: none;
-    }
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px 100px;
+    position: relative;
+    z-index: 1;
+  }
 
-    .wrap {
-      width: min(1160px, 100%);
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+  header {
+    padding: 56px 0 44px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 52px;
+    position: relative;
+  }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 18px;
-      color: var(--dim);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+  .header-rule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  }
 
-    .brand {
-      display: inline-flex;
-      gap: 10px;
-      align-items: center;
-    }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
 
-    .pulse {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 24px rgba(98,214,167,0.78);
-    }
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
-    .hero {
-      border: 1px solid var(--line-strong);
-      background: linear-gradient(180deg, rgba(18,22,38,0.94), rgba(13,16,27,0.88));
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
-    }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      right: -120px;
-      top: -120px;
-      width: 360px;
-      height: 360px;
-      background: radial-gradient(circle, rgba(142,162,255,0.20), transparent 66%);
-      pointer-events: none;
-    }
+  h1 .accent-line {
+    color: var(--accent);
+    display: block;
+  }
 
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 28px;
-      padding: clamp(28px, 5vw, 58px);
-      position: relative;
-      z-index: 2;
-    }
+  .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 22px;
+    max-width: 500px;
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
 
-    .eyebrow {
-      font-family: var(--mono);
-      color: var(--accent-2);
-      font-size: 12px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
+  .meta-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
 
-    h1 {
-      font-size: clamp(38px, 6vw, 78px);
-      line-height: 0.94;
-      letter-spacing: -0.065em;
-      font-weight: 800;
-      max-width: 760px;
-    }
+  .meta-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 5px 11px;
+    border-radius: 1px;
+  }
 
-    h1 em {
-      font-family: var(--serif);
-      font-weight: 400;
-      letter-spacing: -0.025em;
-      color: var(--accent-2);
-      font-style: italic;
-    }
+  .meta-tag.hi {
+    color: var(--accent);
+    border-color: rgba(240,192,64,0.25);
+    background: rgba(240,192,64,0.05);
+  }
 
-    .lead {
-      color: var(--muted);
-      font-size: clamp(16px, 1.8vw, 20px);
-      line-height: 1.72;
-      max-width: 725px;
-      margin-top: 24px;
-      font-weight: 300;
-    }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
 
-    .lead strong { color: var(--text); font-weight: 600; }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
 
-    .context-card {
-      border: 1px solid var(--line);
-      background: rgba(10,13,23,0.62);
-      border-radius: 22px;
-      padding: 22px;
-      align-self: end;
-    }
+  .verdict {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 32px 36px;
+    border-radius: 2px;
+    margin-bottom: 52px;
+  }
 
-    .context-card h2 {
-      font-size: 14px;
-      font-family: var(--mono);
-      color: var(--accent);
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
+  .verdict-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
 
-    .signal-list { display: grid; gap: 14px; }
+  .verdict-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--text);
+  }
 
-    .signal {
-      display: grid;
-      grid-template-columns: 30px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
+  .verdict-text strong { color: var(--accent); font-weight: 700; }
 
-    .signal-num {
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--ice);
-      border: 1px solid rgba(168,240,255,0.25);
-      background: rgba(168,240,255,0.06);
-    }
+  .dare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 52px;
+  }
 
-    .signal p {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 14px;
-    }
+  @media (max-width: 640px) { .dare-grid { grid-template-columns: 1fr; } }
 
-    .signal strong { color: var(--text); }
+  .dare-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 18px;
-      margin-top: 18px;
-    }
+  .dare-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--dare-color, var(--border));
+  }
 
-    .card {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      border-radius: 24px;
-      padding: 26px;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
-    }
+  .dare-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--dare-color, var(--border));
+  }
 
-    .section-kicker {
-      font-family: var(--mono);
-      color: var(--dim);
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
+  .dare-letter {
+    font-family: 'Syne', sans-serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    pointer-events: none;
+    transition: color 0.2s ease;
+  }
 
-    .card h3 {
-      font-size: 26px;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
+  .dare-card:hover .dare-letter { color: rgba(255,255,255,0.07); }
 
-    .card-copy {
-      color: var(--muted);
-      line-height: 1.68;
-      font-size: 15px;
-    }
+  .dare-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dare-color, var(--muted));
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-    .flow {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-    }
+  .dare-tag::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--dare-color, var(--muted));
+  }
 
-    .flow-row {
-      display: grid;
-      grid-template-columns: 34px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      border: 1px solid rgba(255,255,255,0.055);
-      background: rgba(255,255,255,0.028);
-      border-radius: 16px;
-      padding: 14px;
-    }
+  .dare-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+    line-height: 1.3;
+  }
 
-    .dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 2px solid var(--green);
-      background: rgba(98,214,167,0.10);
-      margin-left: 8px;
-    }
-    .dot.warn { border-color: var(--amber); background: rgba(243,180,91,0.10); }
-    .dot.bad { border-color: var(--red); background: rgba(239,116,116,0.10); }
+  .dare-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
 
-    .flow-row strong {
-      display: block;
-      font-size: 15px;
-      margin-bottom: 3px;
-    }
+  .dare-finding {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--dare-color, var(--muted));
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    line-height: 1.5;
+  }
 
-    .flow-row span {
-      display: block;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.4;
-    }
+  .dare-finding strong {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
 
-    .badge {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--dim);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 6px 8px;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
+  .risk-matrix {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 36px;
+    margin-bottom: 52px;
+  }
 
-    .questions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 18px;
-    }
+  .risk-matrix h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
 
-    .question {
-      border: 1px solid rgba(142,162,255,0.20);
-      background: rgba(142,162,255,0.065);
-      border-radius: 18px;
-      padding: 18px;
-      min-height: 132px;
-    }
+  .risk-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 80px;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
 
-    .question .mark {
-      color: var(--accent-2);
-      font-family: var(--mono);
-      font-size: 12px;
-      margin-bottom: 14px;
-      display: block;
-    }
+  .risk-row:last-child { border-bottom: none; }
 
-    .question p {
-      color: var(--text);
-      font-weight: 650;
-      letter-spacing: -0.02em;
-      line-height: 1.35;
-    }
+  .risk-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
 
-    .three {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 18px;
-    }
+  .risk-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
 
-    .metric {
-      border: 1px solid var(--line);
-      background: var(--panel-2);
-      border-radius: 22px;
-      padding: 22px;
-      min-height: 172px;
-      position: relative;
-      overflow: hidden;
-    }
+  .risk-score { text-align: center; }
 
-    .metric::after {
-      content: "";
-      position: absolute;
-      inset: auto -30px -40px auto;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: rgba(142,162,255,0.08);
-    }
+  .risk-score-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
 
-    .metric .icon {
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
+  .risk-score-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
 
-    .metric h4 {
-      font-size: 18px;
-      line-height: 1.14;
-      letter-spacing: -0.035em;
-      margin-bottom: 9px;
-    }
+  .score-critical { color: var(--red); }
+  .score-high { color: var(--orange); }
+  .score-medium { color: var(--yellow); }
 
-    .metric p {
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.55;
-    }
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 52px;
+  }
 
-    .wide { grid-column: 1 / -1; }
+  .deliverable-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px 20px;
+  }
 
-    .matrix {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 18px;
-    }
+  .del-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
 
-    .matrix-box {
-      border-radius: 22px;
-      padding: 22px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.032);
-    }
+  .del-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
 
-    .matrix-box h4 {
-      font-size: 18px;
-      margin-bottom: 12px;
-      letter-spacing: -0.03em;
-    }
+  .del-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
 
-    .matrix-box ul {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
+  .timeline {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 36px;
+    margin-bottom: 52px;
+  }
 
-    .matrix-box li::before {
-      content: "→";
-      color: var(--accent);
-      margin-right: 9px;
-      font-family: var(--mono);
-    }
+  .timeline h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
 
-    .hook {
-      margin-top: 18px;
-      border: 1px solid var(--line-strong);
-      border-radius: 24px;
-      padding: 26px;
-      background: linear-gradient(135deg, rgba(142,162,255,0.13), rgba(168,240,255,0.04));
-    }
+  .phase-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
 
-    .hook p {
-      font-size: clamp(20px, 2.6vw, 34px);
-      line-height: 1.16;
-      letter-spacing: -0.045em;
-      font-weight: 800;
-      max-width: 900px;
-    }
+  .phase-row:last-child { border-bottom: none; }
 
-    .hook span {
-      color: var(--accent-2);
-      font-family: var(--serif);
-      font-weight: 400;
-      font-style: italic;
-      letter-spacing: -0.02em;
-    }
+  .phase-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 9px;
+    border-radius: 1px;
+    border: 1px solid;
+    text-align: center;
+    align-self: start;
+    white-space: nowrap;
+  }
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: end;
-      margin-top: 18px;
-      padding: 24px 4px 4px;
-      color: var(--dim);
-      font-size: 12px;
-      line-height: 1.6;
-    }
+  .phase-1 { color: var(--accent3); border-color: rgba(61,232,192,0.3); background: rgba(61,232,192,0.07); }
+  .phase-2 { color: var(--yellow); border-color: rgba(240,192,64,0.3); background: rgba(240,192,64,0.07); }
+  .phase-3 { color: var(--green); border-color: rgba(34,212,126,0.3); background: rgba(34,212,126,0.07); }
 
-    .footer strong { color: var(--muted); }
+  .phase-content strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    margin-bottom: 6px;
+  }
 
-    .sources {
-      margin-top: 12px;
-      color: var(--dim);
-      font-family: var(--mono);
-      font-size: 10px;
-      line-height: 1.65;
-      max-width: 760px;
-    }
+  .phase-content p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
 
-    @media (max-width: 900px) {
-      .hero-inner, .grid, .matrix { grid-template-columns: 1fr; }
-      .questions, .three { grid-template-columns: 1fr; }
-      .context-card { align-self: stretch; }
-      .footer { flex-direction: column; align-items: start; }
-    }
+  .phase-outputs {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
 
-    @media print {
-      body { background: #080A10; padding: 0; }
-      .wrap { width: 100%; }
-      .hero, .card, .metric, .hook { box-shadow: none; }
-    }
-  </style>
+  .phase-outputs span { color: var(--accent); margin-right: 6px; }
+
+  .final {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 44px;
+    margin-bottom: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final::after {
+    content: 'DARE';
+    position: absolute;
+    right: 24px;
+    bottom: -16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 110px;
+    font-weight: 800;
+    color: rgba(240,192,64,0.04);
+    letter-spacing: -0.03em;
+    pointer-events: none;
+  }
+
+  .final h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
+  }
+
+  .final p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 28px;
+  }
+
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .cta-primary {
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 13px 30px;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-radius: 1px;
+    text-transform: uppercase;
+    transition: all 0.15s ease;
+  }
+
+  .cta-primary:hover { background: #f5d060; transform: translateY(-1px); }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 13px 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border-radius: 1px;
+    text-transform: uppercase;
+    transition: all 0.15s ease;
+  }
+
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-brand {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+  }
+
+  .footer-brand span { color: var(--accent); }
+
+  .dacr {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.4;
+    align-self: flex-end;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeUp 0.5s ease forwards; opacity: 0; }
+  .d1 { animation-delay: 0.08s; }
+  .d2 { animation-delay: 0.16s; }
+  .d3 { animation-delay: 0.24s; }
+  .d4 { animation-delay: 0.32s; }
+  .d5 { animation-delay: 0.40s; }
+  .d6 { animation-delay: 0.48s; }
+  .d7 { animation-delay: 0.56s; }
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="topbar">
-      <div class="brand"><span class="pulse"></span> Operator intelligence brief</div>
-      <div>Sweden data center builds · AI readiness · Decision velocity</div>
+<div class="container">
+
+  <header class="animate">
+    <div class="header-rule"></div>
+    <div class="eyebrow">
+      <div class="eyebrow-dot"></div>
+      DARE v1.0 · Operational Stress-Test and Decision Intelligence System
+    </div>
+    <h1>
+      PRO POWER
+      <span class="accent-line">OPERATIONS</span>
+      BRIEF
+    </h1>
+    <p class="subtitle">Where execution breaks, where visibility disappears, where risk accumulates before it becomes a financial event. Built from confirmed operational architecture, not a template.</p>
+    <div class="meta-row">
+      <span class="meta-tag hi">Target: Pro Power Support</span>
+      <span class="meta-tag">Energy Infrastructure</span>
+      <span class="meta-tag">Field Services</span>
+      <span class="meta-tag">Government Contracts</span>
+      <span class="meta-tag hi">DARE: Active</span>
+      <span class="meta-tag">Epoch Frameworks LLC</span>
+    </div>
+  </header>
+
+  <div class="verdict animate d1">
+    <div class="verdict-label">Diagnostic Verdict</div>
+    <div class="verdict-text">
+      Pro Power Support has the people, the contracts, and the operational capability to scale. What it does not have is a <strong>structured system for converting operational signals into decisions</strong> before those signals become failures. The data exists. The intelligence layer does not. That gap is exactly where downtime, margin erosion, and execution instability are produced at scale.
+    </div>
+  </div>
+
+  <div class="animate d2">
+    <div class="section-label">DARE Diagnostic — Four Operational Dimensions</div>
+  </div>
+
+  <div class="dare-grid animate d3">
+
+    <div class="dare-card" style="--dare-color: var(--accent);">
+      <div class="dare-letter">D</div>
+      <div class="dare-tag">Data · Signal Integrity</div>
+      <h3>What Signals Is Leadership Making Decisions From?</h3>
+      <p>The diagnostic question is not whether data exists — it does. The question is whether the data reaching leadership is current, accurate, and connected across the business. Field information filtered through whoever chose to report it is not operational intelligence. It is an approximation.</p>
+      <div class="dare-finding">
+        <strong>Primary Gap</strong>
+        Proposal assumptions are decoupled from real-time operational costs. Inspection findings are logged but not trendable. Equipment utilization visibility depends on manual assembly rather than live signal.
+      </div>
     </div>
 
-    <section class="hero">
-      <div class="hero-inner">
+    <div class="dare-card" style="--dare-color: var(--accent3);">
+      <div class="dare-letter">A</div>
+      <div class="dare-tag">Agility · Execution Responsiveness</div>
+      <h3>How Fast Can the Organization Adapt When Conditions Change?</h3>
+      <p>Agility gaps in field-service organizations do not appear as dramatic failures. They appear as consistent small delays that compound across a week, a month, a quarter — until a client escalates, a project slips, or a competitor who moves faster wins the renewal conversation.</p>
+      <div class="dare-finding">
+        <strong>Primary Gap</strong>
+        Decision latency between field event and leadership awareness is unquantified and unmanaged. Emergency response capability depends on institutional knowledge held by specific individuals, not systems.
+      </div>
+    </div>
+
+    <div class="dare-card" style="--dare-color: var(--accent2);">
+      <div class="dare-letter">R</div>
+      <div class="dare-tag">Risk · Hidden Exposure</div>
+      <h3>Where Is Operational Exposure Accumulating Before It Registers as Risk?</h3>
+      <p>Risk in field-service organizations accumulates invisibly because it does not register until it becomes an event. Tribal knowledge exposure, staffing concentration, recurring maintenance failures, and contract margin erosion each produce the same pattern: no warning, then a problem that was predictable in retrospect.</p>
+      <div class="dare-finding">
+        <strong>Primary Gap</strong>
+        No executive operational risk map exists. High-impact dependencies are not scored for likelihood or proximity. Maintenance issues that are recurring rather than isolated are not flagged as systemic risk.
+      </div>
+    </div>
+
+    <div class="dare-card" style="--dare-color: var(--green);">
+      <div class="dare-letter">E</div>
+      <div class="dare-tag">Evolution · Scale Readiness</div>
+      <h3>Can the Organization Scale Without Leadership Touching Every Decision That Matters?</h3>
+      <p>Growth does not automatically produce operational clarity. At a certain scale threshold — different for every organization but predictable in its symptoms — more contracts mean more exposure in proposals priced without a current cost model. More staff means more dependency on processes that were never formalized.</p>
+      <div class="dare-finding">
+        <strong>Primary Gap</strong>
+        Process maturity is not sufficient to absorb growth without requiring leadership involvement in decisions that should be owned at the operator level. The organization is building scale on individual memory rather than operational memory.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="animate d4">
+    <div class="section-label">Infrastructure Risk Matrix</div>
+    <div class="risk-matrix">
+      <h2>Where Exposure Is Accumulating</h2>
+
+      <div class="risk-row">
         <div>
-          <div class="eyebrow">For builders moving from infrastructure to intelligent operations</div>
-          <h1>Where Sweden data center builds <em>slow down</em> after go-live.</h1>
-          <p class="lead">
-            The first bottleneck is rarely ambition. Sweden has the climate, renewable energy story, and strategic position to attract AI infrastructure. The operational question is sharper: <strong>once the site is live, who owns the correction loop when power, demand, cooling, utilization, and customer load start moving at different speeds?</strong>
-          </p>
+          <div class="risk-name">Tribal Knowledge Concentration</div>
+          <div class="risk-desc">Critical workflows and institutional knowledge held by specific individuals rather than documented systems. Single-point-of-failure risk on key operator departure.</div>
         </div>
-
-        <aside class="context-card">
-          <h2>Current signal</h2>
-          <div class="signal-list">
-            <div class="signal">
-              <div class="signal-num">01</div>
-              <p><strong>AI demand is raising density.</strong> Rack loads are moving beyond traditional assumptions, which puts pressure on cooling, power planning, and operating models.</p>
-            </div>
-            <div class="signal">
-              <div class="signal-num">02</div>
-              <p><strong>Europe is racing infrastructure gaps.</strong> Connectivity, energy access, and data center capacity are becoming strategic constraints.</p>
-            </div>
-            <div class="signal">
-              <div class="signal-num">03</div>
-              <p><strong>Sweden can win on discipline.</strong> The edge is not just building capacity. It is proving that live operations can adjust faster than conditions drift.</p>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="grid">
-      <article class="card">
-        <div class="section-kicker">The pattern</div>
-        <h3>The build gets done. The decision loop is where value leaks.</h3>
-        <p class="card-copy">
-          Data centers do not fail because teams cannot see data. They slow down because visibility does not automatically create ownership, trigger points, or fast correction.
-        </p>
-
-        <div class="flow">
-          <div class="flow-row">
-            <div class="dot"></div>
-            <div><strong>Infrastructure execution</strong><span>Power, cooling, fiber, space, security, vendors, and commissioning.</span></div>
-            <div class="badge">Build</div>
-          </div>
-          <div class="flow-row">
-            <div class="dot"></div>
-            <div><strong>Operational visibility</strong><span>Monitoring exists across utilization, load, thermals, availability, and alerts.</span></div>
-            <div class="badge">Signal</div>
-          </div>
-          <div class="flow-row">
-            <div class="dot warn"></div>
-            <div><strong>Ownership ambiguity</strong><span>The data is visible, but the action owner is not always obvious.</span></div>
-            <div class="badge">Friction</div>
-          </div>
-          <div class="flow-row">
-            <div class="dot bad"></div>
-            <div><strong>Delayed adjustment</strong><span>Demand shifts, utilization drifts, cooling constraints show up, and correction waits.</span></div>
-            <div class="badge">Drag</div>
-          </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-critical">9</div>
+          <div class="risk-score-label">Likelihood</div>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="section-kicker">The real question</div>
-        <h3>Capability is not the same thing as a guaranteed response.</h3>
-        <p class="card-copy">
-          The operating gap is not whether the team can adjust. The gap is whether the system makes the right adjustment unavoidable, owned, and fast enough to protect capacity, margin, and customer trust.
-        </p>
-
-        <div class="questions">
-          <div class="question">
-            <span class="mark">01 / OWNER</span>
-            <p>Who owns the decision when utilization drifts?</p>
-          </div>
-          <div class="question">
-            <span class="mark">02 / TRIGGER</span>
-            <p>What causes action before the window closes?</p>
-          </div>
-          <div class="question">
-            <span class="mark">03 / PROOF</span>
-            <p>How do we know correction happened in practice?</p>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <section class="three">
-      <article class="metric">
-        <div class="icon">⚡</div>
-        <h4>Power becomes a strategy problem.</h4>
-        <p>AI demand makes power planning more than procurement. The winners will coordinate grid access, workload timing, energy flexibility, and customer commitments.</p>
-      </article>
-      <article class="metric">
-        <div class="icon">❄️</div>
-        <h4>Cooling becomes an operating model.</h4>
-        <p>High-density AI workloads increase the need for liquid cooling, heat recovery, and tighter operational discipline across thermal decisions.</p>
-      </article>
-      <article class="metric">
-        <div class="icon">🔁</div>
-        <h4>Feedback loops become margin protection.</h4>
-        <p>Every slow handoff between signal and action compounds across load, uptime, revenue capture, and customer confidence.</p>
-      </article>
-    </section>
-
-    <section class="card wide">
-      <div class="section-kicker">How I would frame the work</div>
-      <h3>Short-term: get the AI working like it should. Long-term: help the Sweden build operate with fewer blind spots.</h3>
-      <p class="card-copy">
-        The practical starting point is not a giant transformation program. It is a short diagnostic sprint that identifies where AI support, operator workflow, and decision ownership are not lining up yet.
-      </p>
-
-      <div class="matrix">
-        <div class="matrix-box">
-          <h4>Short-term AI support</h4>
-          <ul>
-            <li>Map what AI is supposed to help with</li>
-            <li>Find where the workflow breaks or adds effort</li>
-            <li>Convert AI output into an operator action path</li>
-            <li>Define the handoff between human judgment and automation</li>
-          </ul>
-        </div>
-        <div class="matrix-box">
-          <h4>Sweden operating readiness</h4>
-          <ul>
-            <li>Pressure test the demand, power, cooling, and utilization loop</li>
-            <li>Clarify who owns each live operating decision</li>
-            <li>Define trigger points before drift becomes drag</li>
-            <li>Create a simple executive view of what needs attention</li>
-          </ul>
+        <div class="risk-score">
+          <div class="risk-score-val score-critical">9</div>
+          <div class="risk-score-label">Impact</div>
         </div>
       </div>
-    </section>
 
-    <section class="hook">
-      <p>
-        The value is not another dashboard. <span>The value is knowing exactly when the system needs a decision, who owns it, and how fast correction happens.</span>
-      </p>
-    </section>
-
-    <footer class="footer">
-      <div>
-        <strong>Prepared by Erwin McDonald</strong><br />
-        Epoch Frameworks LLC · AI adoption architecture · Operator decision systems
-        <div class="sources">
-          Public signal basis: IEA data center electricity demand update, Reuters on European AI/data center infrastructure pressure, Reuters on Mistral AI Sweden investment, and current Sweden/Nordic data center market reporting.
+      <div class="risk-row">
+        <div>
+          <div class="risk-name">Decision Latency Under Emergency Conditions</div>
+          <div class="risk-desc">Time from field event to leadership awareness and decision is unquantified. Emergency response speed depends on communication chains that have not been stress-tested.</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-critical">8</div>
+          <div class="risk-score-label">Likelihood</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-critical">9</div>
+          <div class="risk-score-label">Impact</div>
         </div>
       </div>
-      <div>
-        One-page conversation brief<br />
-        Built for dinner discussion, not a full proposal
+
+      <div class="risk-row">
+        <div>
+          <div class="risk-name">Proposal Margin Drift</div>
+          <div class="risk-desc">Proposal assumptions decoupled from real-time labor rates, equipment cycles, and material costs. Systematic margin erosion accumulates across contracts without a visible signal until close.</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-high">7</div>
+          <div class="risk-score-label">Likelihood</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-high">8</div>
+          <div class="risk-score-label">Impact</div>
+        </div>
       </div>
-    </footer>
-  </main>
+
+      <div class="risk-row">
+        <div>
+          <div class="risk-name">Government Contract Execution Exposure</div>
+          <div class="risk-desc">Compliance reporting, documentation, and delivery timeline obligations on government contracts amplify execution risk where operational accountability is unclear.</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-high">7</div>
+          <div class="risk-score-label">Likelihood</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-critical">9</div>
+          <div class="risk-score-label">Impact</div>
+        </div>
+      </div>
+
+      <div class="risk-row">
+        <div>
+          <div class="risk-name">AI Integration Without Workflow Fit</div>
+          <div class="risk-desc">AI tools deployed without operator-level workflow alignment create friction rather than efficiency. Recommendations that operators do not trust are ignored — and ignored AI is expensive AI.</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-high">6</div>
+          <div class="risk-score-label">Likelihood</div>
+        </div>
+        <div class="risk-score">
+          <div class="risk-score-val score-high">7</div>
+          <div class="risk-score-label">Impact</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="animate d5">
+    <div class="section-label">Four Diagnostic Outputs</div>
+  </div>
+
+  <div class="deliverables animate d5">
+
+    <div class="deliverable-card">
+      <div class="del-number">Output 01</div>
+      <div class="del-title">Operational Continuity Score</div>
+      <div class="del-desc">A composite baseline measuring visibility, execution reliability, response capability, and coordination maturity. Quantifies the operational floor today and what closing specific gaps would move it to.</div>
+    </div>
+
+    <div class="deliverable-card">
+      <div class="del-number">Output 02</div>
+      <div class="del-title">Decision Latency Map</div>
+      <div class="del-desc">A visual representation of where approvals stall, where information bottlenecks are systematically produced, and where operational delays originate in the current structure.</div>
+    </div>
+
+    <div class="deliverable-card">
+      <div class="del-number">Output 03</div>
+      <div class="del-title">Infrastructure Risk Matrix</div>
+      <div class="del-desc">A ranked view of operational dependencies, maintenance exposure, compliance gaps, and staffing vulnerabilities — scored for likelihood and impact so leadership prioritizes by return, not urgency.</div>
+    </div>
+
+    <div class="deliverable-card">
+      <div class="del-number">Output 04</div>
+      <div class="del-title">AI Readiness Assessment</div>
+      <div class="del-desc">An evaluation of whether AI tools would fit current operations or create friction — identifying where automation breaks trust and where a recommendation would be ignored because operators cannot see what produced it.</div>
+    </div>
+
+  </div>
+
+  <div class="animate d6">
+    <div class="section-label">90-Day Engagement Structure</div>
+    <div class="timeline">
+      <h2>Three Phases. Measurable at Each.</h2>
+
+      <div class="phase-row">
+        <div class="phase-tag phase-1">Days 1–30</div>
+        <div class="phase-content">
+          <strong>Diagnostic and Signal Mapping</strong>
+          <p>Operator interviews, decision flow mapping, system versus human ownership gap analysis, and utilization response lag analysis. This phase produces the baseline against which all subsequent improvement is measured.</p>
+          <div class="phase-outputs">
+            <div><span>→</span>Diagnostic brief</div>
+            <div><span>→</span>Operational risk hypothesis</div>
+            <div><span>→</span>Initial friction map</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-row">
+        <div class="phase-tag phase-2">Days 31–60</div>
+        <div class="phase-content">
+          <strong>Architecture and Intervention Design</strong>
+          <p>Define operator ownership layers. Establish decision triggers. Design workflow interventions that reduce execution latency without adding administrative overhead. Align AI output pathways with real operational execution.</p>
+          <div class="phase-outputs">
+            <div><span>→</span>Decision architecture model</div>
+            <div><span>→</span>Intervention design brief</div>
+            <div><span>→</span>Priority action stack</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-row">
+        <div class="phase-tag phase-3">Days 61–90</div>
+        <div class="phase-content">
+          <strong>Implementation and Validation</strong>
+          <p>Deploy lightweight operator workflows. Validate decision loop speed against the Day 1 baseline. Establish correction guarantees. Measure operational lift against the DARE Operational Continuity Score.</p>
+          <div class="phase-outputs">
+            <div><span>→</span>Execution validation report</div>
+            <div><span>→</span>Operator adoption signals</div>
+            <div><span>→</span>Final recommendations</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="final animate d7">
+    <div class="section-label">Proposed Next Step</div>
+    <h2>Walk the System. Find Where It Slows.</h2>
+    <p>
+      This brief identifies the pattern. The diagnostic confirms it inside your specific operational architecture. What that requires is a structured conversation with the people who own the workflows — not a presentation, not a proposal review. A working session that maps where decisions actually slow down and what moving them faster would produce.
+    </p>
+    <p>
+      No new software. No methodology overhead. A working engagement that starts with your current system and makes it measurably better.
+    </p>
+    <div class="cta-row">
+      <button class="cta-primary" onclick="window.location.href='mailto:?subject=Pro Power Support - DARE Discovery Session'">
+        Schedule Discovery Session
+      </button>
+      <button class="cta-secondary" onclick="window.open('https://github.com/emcdo411/the-pro-power-discovery', '_blank')">
+        View on GitHub
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <span>Epoch Frameworks LLC</span> · Erwin M. McDonald · Fort Worth, TX<br>
+      DARE v1.0 · AI Adoption Architect v6.6 · Fractional CXO Practice Builder v2.6
+    </div>
+    <div class="dacr">Protected under DACR License v2.6</div>
+  </footer>
+
+</div>
 </body>
 </html>
