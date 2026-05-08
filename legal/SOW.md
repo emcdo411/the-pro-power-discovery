@@ -22,13 +22,18 @@
 
 The objective of this engagement is to evaluate Pro Power Support's operational architecture, decision flows, field-to-office visibility, AI integration readiness, and execution risk profile — and to design, build, and deploy a proprietary DARE Intelligence System that surfaces operational blind spots, scores risk exposure, and delivers a prioritized action stack and executive findings brief enabling measurable operational improvement.
 
-This engagement is two things simultaneously: an operational diagnostic and a technology build. Epoch Frameworks LLC will conduct the DARE assessment AND construct the underlying AI intelligence system that executes it. Client receives both the findings and the operational benefit of a system built specifically for Pro Power Support's infrastructure environment.
+This engagement is simultaneously:
+
+1. An operational resilience diagnostic  
+2. A proprietary AI intelligence system build  
+
+Epoch Frameworks LLC will conduct the DARE assessment AND construct the underlying AI intelligence system that executes it. Client receives both the findings and the operational benefit of a system built specifically for Pro Power Support's infrastructure environment.
 
 ---
 
 # 2. What Is Being Built
 
-This engagement deploys the DARE Operational Resilience Intelligence System — a proprietary AI-powered diagnostic engine built and operated by Epoch Frameworks LLC as a one-architect build.
+This engagement deploys the DARE Operational Resilience Intelligence System — a proprietary AI-powered diagnostic engine built and operated by Epoch Frameworks LLC as a one-architect operational intelligence build.
 
 The system architecture includes six integrated layers:
 
@@ -45,7 +50,9 @@ The system architecture includes six integrated layers:
 
 # 3. Scope of Work
 
-Epoch Frameworks LLC will perform a structured diagnostic and intelligence system build across four DARE dimensions. Scope includes, but is not limited to, the following:
+Epoch Frameworks LLC will perform a structured diagnostic and intelligence system build across four DARE dimensions.
+
+Scope includes, but is not limited to, the following:
 
 ## Dimension 1 — Data
 
@@ -55,6 +62,8 @@ Epoch Frameworks LLC will perform a structured diagnostic and intelligence syste
 4. System fragmentation scoring — identifying where data lives and how it flows  
 5. API integration for real-time contextual intelligence (EIA fuel pricing, NOAA weather, FEMA declarations)  
 
+---
+
 ## Dimension 2 — Agility
 
 1. Deployment speed analysis for mobile unit and emergency response operations  
@@ -62,6 +71,8 @@ Epoch Frameworks LLC will perform a structured diagnostic and intelligence syste
 3. Decision latency scoring — where decisions slow, stall, or require founder involvement  
 4. Proposal turnaround time assessment and bottleneck identification  
 5. MCP-integrated calendar and scheduling analysis for crew availability and deployment concentration risk  
+
+---
 
 ## Dimension 3 — Risk
 
@@ -71,6 +82,8 @@ Epoch Frameworks LLC will perform a structured diagnostic and intelligence syste
 4. Maintenance failure pattern detection and compounding risk synthesis  
 5. Dependency concentration mapping — single points of failure in people, systems, and processes  
 
+---
+
 ## Dimension 4 — Evolution
 
 1. Scalability readiness assessment — what breaks first when volume doubles  
@@ -78,6 +91,8 @@ Epoch Frameworks LLC will perform a structured diagnostic and intelligence syste
 3. Process maturity evaluation — documented versus tribal knowledge workflows  
 4. Operational memory architecture review and founder dependency reduction roadmap  
 5. Government contract growth pathway analysis via USASpending.gov intelligence  
+
+---
 
 > **Scope Protection:** Scope includes, but is not limited to, the items enumerated above. Supporting analysis, documentation, API configurations, prompt architecture refinements, and executive communication artifacts required to operationalize findings are included within scope at Epoch Frameworks LLC's diagnostic judgment, without requiring a Change Order.
 
@@ -87,51 +102,95 @@ Epoch Frameworks LLC will perform a structured diagnostic and intelligence syste
 
 | Deliverable | Description |
 |---|---|
-| DARE Intelligence System | Fully configured five-stage AI prompt chain, MCP integration, API connections, and session state architecture — the system itself |
-| DARE Operational Resilience Brief | Four-dimension diagnostic synthesis — executive-grade narrative with scored findings and evidence citations |
-| Operational Risk Matrix | Scored exposure map with severity ratings, likelihood scores, and time horizons for each identified risk |
-| Decision Latency Map | Visual trace of where decisions slow, stall, or require founder involvement — with root-cause identification |
-| Friction Mapping Report | Identified operational friction points with root-cause tagging and system vs. human ownership classification |
-| AI Workflow Integration Assessment | Readiness score per operational function with a specific integration pathway and tooling recommendations |
-| Priority Action Stack | Ranked, time-bounded intervention list with action, owner type, timeline, and impact rating per item |
-| Executive Recommendations Brief | Next-phase implementation guidance with decision architecture and scaling roadmap |
+| DARE Intelligence System | Fully configured five-stage AI prompt chain, MCP integration, API connections, and session state architecture |
+| DARE Operational Resilience Brief | Executive-grade narrative with scored findings and evidence citations |
+| Operational Risk Matrix | Scored exposure map with severity ratings, likelihood scores, and time horizons |
+| Decision Latency Map | Visual trace of where decisions slow, stall, or require founder involvement |
+| Friction Mapping Report | Operational friction points with root-cause tagging and ownership classification |
+| AI Workflow Integration Assessment | Readiness score per operational function with tooling recommendations |
+| Priority Action Stack | Ranked intervention list with owner type, timeline, and impact rating |
+| Executive Recommendations Brief | Scaling roadmap and next-phase implementation guidance |
 
-> **Final Deliverable Hold:** Epoch Frameworks LLC reserves the right to withhold final deliverable release pending settlement of any outstanding balance. System access and deliverable files transfer upon full payment.
+---
+
+> **Final Deliverable Hold:** Epoch Frameworks LLC reserves the right to withhold final deliverable release pending settlement of any outstanding balance. System access and deliverable file transfer occur upon full payment.
 
 ---
 
 # 5. Engagement Options
 
-## Option A — Four-Week Diagnostic Sprint + System Build
+# Option A — Four-Week Diagnostic Sprint + AI Intelligence System Build
 
-Fixed-scope engagement covering the complete DARE Intelligence System build, all four diagnostic dimensions, and all eight deliverables.
+Fixed-scope engagement covering:
+
+- Full DARE Intelligence System build  
+- All four diagnostic dimensions  
+- MCP integration architecture  
+- API integrations  
+- Executive findings synthesis  
+- All eight deliverables  
+
+This engagement includes both operational consulting and proprietary AI system architecture development.
 
 | Term | Detail |
 |---|---|
-| Total Fee | $12,000 flat — fixed scope, no variable billing |
-| Mobilization Fee | $6,000 (50%) due upon contract execution — NON-REFUNDABLE |
-| Remaining Balance | $6,000 due upon delivery of final executive brief and system handoff |
+| Total Fee | **$24,000 flat — fixed scope, no variable billing** |
+| Mobilization Fee | **$12,000 (50%) due upon contract execution — NON-REFUNDABLE** |
+| Remaining Balance | **$12,000 due upon final executive brief and system handoff** |
 | Duration | Four (4) weeks from mobilization fee clearance |
 | Payment Terms | Net 7 from invoice date |
 | Late Payment | 1.5% per month applied to outstanding balance after Net 7 grace period |
-| What Is Included | System architecture build + all diagnostic dimensions + all eight deliverables |
-
-### Pricing Rationale — Option A
-
-The $12,000 fee reflects two distinct scopes of work:
-
-1. Senior-level operational diagnostic requiring discovery, analysis, synthesis, and executive brief production  
-2. Proprietary AI intelligence system build including prompt architecture, API integrations, MCP configuration, and session state management  
-
-A diagnostic-only engagement at this scope would be $7,500–$10,000. A system build of this complexity would add $5,000–$8,000 as a standalone engagement.
-
-The combined flat fee of $12,000 reflects the operational efficiency of a one-architect build and the value of receiving both the findings and the system.
+| What Is Included | AI system architecture build + diagnostic execution + operational intelligence synthesis + all deliverables |
 
 ---
 
-## Option B — Ninety-Day Fractional Advisory Engagement
+## Pricing Rationale — Option A
 
-Extended engagement covering active advisory, embedded diagnostic, system iteration, implementation support, and ongoing operational intelligence.
+The $24,000 fee reflects two distinct scopes of work:
+
+### 1. Senior-Level Operational Diagnostic
+Includes:
+- discovery,
+- operational analysis,
+- executive synthesis,
+- scoring systems,
+- risk identification,
+- governance evaluation,
+- and executive brief production.
+
+### 2. Proprietary AI Intelligence System Build
+Includes:
+- prompt architecture,
+- MCP configuration,
+- API integrations,
+- operational intelligence orchestration,
+- state management,
+- structured output engineering,
+- and AI workflow infrastructure design.
+
+A diagnostic-only engagement at this sophistication level would typically range from $10,000–$15,000.
+
+A proprietary operational intelligence system build of this complexity would independently range from $15,000–$25,000.
+
+The combined flat fee of $24,000 reflects the operational efficiency of a one-architect build while preserving executive-level strategic depth and system architecture value.
+
+---
+
+# Option B — Ninety-Day Fractional Advisory Engagement
+
+Extended engagement covering:
+- embedded advisory,
+- ongoing operational intelligence,
+- implementation oversight,
+- workflow iteration,
+- AI integration refinement,
+- governance evolution,
+- and decision architecture support.
+
+Includes all Option A deliverables plus:
+- Phase 2 architecture design
+- Phase 3 implementation validation
+- iterative operational intelligence refinement
 
 | Term | Detail |
 |---|---|
@@ -148,15 +207,16 @@ Extended engagement covering active advisory, embedded diagnostic, system iterat
 
 ---
 
-## Option C — Custom Advisory Block
+# Option C — Custom Advisory Block
 
 Custom advisory blocks available for targeted scope, including:
 
 - RFP intelligence and proposal workflow design  
-- Field-service reporting architecture  
+- field-service reporting architecture  
 - AI integration validation  
-- Decision architecture review  
-- Government contracting intelligence  
+- decision architecture review  
+- government contracting intelligence  
+- executive operational readiness analysis  
 
 Scope, pricing, duration, and payment terms defined by mutual written agreement executed as a Change Order prior to commencement of work.
 
@@ -173,7 +233,10 @@ Scope, pricing, duration, and payment terms defined by mutual written agreement 
 5. Risk synthesis and compounding exposure identification  
 
 **Deliverables:**  
-DARE Intelligence System (functional), DARE Resilience Brief (draft), Friction Mapping Report, Operational Risk Matrix
+- DARE Intelligence System (functional)  
+- DARE Resilience Brief (draft)  
+- Friction Mapping Report  
+- Operational Risk Matrix  
 
 ---
 
@@ -185,7 +248,8 @@ DARE Intelligence System (functional), DARE Resilience Brief (draft), Friction M
 4. Government contracting intelligence integration (USASpending, SAM)  
 
 **Deliverables:**  
-Decision Latency Map, AI Workflow Integration Assessment
+- Decision Latency Map  
+- AI Workflow Integration Assessment  
 
 ---
 
@@ -197,7 +261,8 @@ Decision Latency Map, AI Workflow Integration Assessment
 4. Finalize Priority Action Stack and scaling roadmap  
 
 **Deliverables:**  
-Priority Action Stack, Executive Recommendations Brief
+- Priority Action Stack  
+- Executive Recommendations Brief  
 
 ---
 
@@ -205,36 +270,43 @@ Priority Action Stack, Executive Recommendations Brief
 
 Client agrees to provide reasonable access to relevant context, including:
 
-1. Leadership and operations discovery interviews — minimum two sessions, each 60–90 minutes  
-2. Process descriptions and operating constraints in whatever form they currently exist  
-3. Representative workflow examples, including proposal, inspection, and dispatch samples  
-4. Selected proposal, RFP, inspection, or maintenance artifacts when available  
-5. Timely responses to information requests within five (5) business days  
-6. Google Drive, Gmail, and Calendar access authorization for MCP integration (required for Option A/B)  
+1. Leadership and operations discovery interviews  
+2. Process descriptions and operating constraints  
+3. Representative workflow examples  
+4. Proposal, inspection, dispatch, or maintenance artifacts  
+5. Timely responses to information requests  
+6. Google Drive, Gmail, and Calendar authorization for MCP integration  
 
-> **Client Delay Protection:** Delays in client-provided access that materially impact the engagement timeline do not reduce the fees owed under this SOW.
+---
+
+> **Client Delay Protection:** Delays in client-provided access that materially impact the engagement timeline do not reduce fees owed under this SOW.
 
 ---
 
 # 8. Out of Scope
 
-Unless separately agreed in writing via an executed Change Order, this engagement does not include:
+Unless separately agreed via executed Change Order:
 
-1. Custom software development or production application deployment  
-2. Cybersecurity assessment, remediation, or architecture  
-3. Legal advice, accounting advice, or tax advisory  
-4. Engineering certification, equipment repair, or field inspection execution  
-5. Permanent staff augmentation or recruitment  
-6. Procurement, licensing, or subscription management for third-party tools  
-7. API hosting, server infrastructure, or cloud environment management beyond the engagement period  
+1. Custom software product deployment  
+2. Cybersecurity remediation  
+3. Legal or tax advisory  
+4. Engineering certification  
+5. Permanent staffing  
+6. Third-party licensing procurement  
+7. Cloud infrastructure hosting beyond engagement period  
 
 ---
 
 # 9. Change Order Control
 
-Any material expansion of scope — including additional deliverables, extended timelines, new functional requirements, new API integrations, or new stakeholder engagements — requires a mutually executed written Change Order specifying revised scope, timeline, and commercial terms before additional work begins.
+Any material expansion of scope requires a mutually executed written Change Order defining revised:
 
-Verbal approvals do not constitute authorization for scope expansion.
+- scope,
+- timeline,
+- deliverables,
+- and commercial terms.
+
+Verbal approvals do not constitute authorization for expanded work.
 
 ---
 
@@ -242,77 +314,84 @@ Verbal approvals do not constitute authorization for scope expansion.
 
 ## Proprietary Framework and System Protection
 
-All diagnostic methodology, scoring systems, prompt architecture, API integration logic, session state design, framework structure, decision models, and analytical logic deployed in this engagement are proprietary to Epoch Frameworks LLC and its principal, Erwin Maurice McDonald.
+All:
+- diagnostic methodology,
+- scoring systems,
+- prompt architecture,
+- orchestration logic,
+- API integrations,
+- framework structures,
+- operational models,
+- and analytical logic
+
+remain proprietary to Epoch Frameworks LLC and Erwin Maurice McDonald.
 
 Protected under:
 
 **DACR License v2.6 | McDonald (2026) | Epoch Frameworks LLC**
 
-Deliverables represent output only.
-
-No license to underlying frameworks, scoring models, prompt architecture, or diagnostic system logic is granted or implied.
-
-This engagement is not a work-for-hire arrangement.
-
 ---
 
 ## Deliverables License
 
-Client receives a limited, non-exclusive, non-transferable license to use engagement deliverables for internal business purposes only.
+Client receives a limited, non-exclusive, non-transferable internal-use license to deliverables only.
 
-Deliverables may not be sublicensed, resold, shared with competitors, or represented as independently developed work.
+Underlying:
+- frameworks,
+- orchestration systems,
+- prompt architecture,
+- scoring systems,
+- and operational intelligence infrastructure
 
-The DARE Intelligence System architecture, prompt stack, and API configuration remain exclusively owned by Epoch Frameworks LLC.
+remain exclusively owned by Epoch Frameworks LLC.
 
 ---
 
 # 11. Confidentiality
 
-All engagement materials, findings, system architecture documentation, and client operational information are subject to the parties' mutual NDA.
+All engagement materials, findings, operational documentation, and architecture information are confidential and governed by the parties' mutual NDA.
 
-Where no separate NDA is executed, both parties agree to maintain confidentiality over all proprietary, technical, operational, and commercial information exchanged during this engagement.
-
-Confidentiality obligations survive termination of this SOW for a period of three (3) years.
+Confidentiality obligations survive termination for three (3) years.
 
 ---
 
 # 12. Payment, Suspension, and Termination
 
-## Payment Terms Summary
+## Payment Summary
 
 | Term | Detail |
 |---|---|
-| Mobilization Fee | $6,000 — due before work begins, non-refundable |
-| Option A Balance | $6,000 — due upon final deliverable and system handoff |
-| Option B Monthly | ~$18,500 at 25 hrs/week |
-| Invoice Due Date | Net 7 from invoice date |
-| Late Payment | 1.5% per month after Net 7 grace period |
+| Mobilization Fee | $12,000 — non-refundable |
+| Option A Balance | $12,000 due upon final delivery |
+| Option B Monthly | ~$18,500/month |
+| Invoice Due Date | Net 7 |
+| Late Payment | 1.5% monthly |
 | After-Hours | 1.5x standard rate |
-| Rush Surcharge | 25% surcharge for deliverables requested in under 48 hours |
+| Rush Surcharge | 25% |
 
 ---
 
 ## Service Suspension
 
-Epoch Frameworks LLC reserves the right to pause all services upon ten (10) days written notice in the event of material non-payment.
+Epoch Frameworks LLC reserves the right to pause services upon ten (10) days written notice for material non-payment.
 
 ---
 
 ## Termination
 
-Either party may terminate this SOW with thirty (30) days written notice.
+Either party may terminate with thirty (30) days written notice.
 
-All fees accrued through the termination date remain due and payable.
+Fees accrued through termination remain payable.
 
-The mobilization fee is non-refundable under any termination scenario.
+Mobilization fees remain non-refundable.
 
 ---
 
 # 13. Limitation of Liability
 
-Epoch Frameworks LLC's total aggregate liability under this SOW shall not exceed the total fees paid by Client in the three (3) months preceding the event giving rise to the claim.
+Epoch Frameworks LLC's aggregate liability shall not exceed fees paid by Client in the three (3) months preceding the claim.
 
-Neither party shall be liable for consequential, indirect, incidental, special, or punitive damages.
+Neither party shall be liable for consequential, indirect, incidental, or punitive damages.
 
 ---
 
@@ -328,15 +407,15 @@ Neither party shall be liable for consequential, indirect, incidental, special, 
 
 # 15. Entire Agreement
 
-This SOW, together with any executed mutual NDA, constitutes the entire agreement between the parties with respect to this engagement and supersedes all prior discussions, representations, proposals, or communications.
+This SOW and any executed NDA constitute the full agreement between parties and supersede all prior discussions and proposals.
 
-Amendments must be in writing and signed by authorized representatives of both parties.
+Amendments must be written and signed by both parties.
 
 ---
 
 # 16. Acceptance
 
-By signing below, both parties agree to the terms of this Statement of Work and authorize the engagement to proceed upon receipt and clearance of the $6,000 mobilization fee.
+By signing below, both parties agree to the terms of this Statement of Work and authorize the engagement to proceed upon receipt and clearance of the mobilization fee.
 
 ---
 
