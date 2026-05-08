@@ -8,7 +8,7 @@ This fee is not positioned as a technology implementation charge. It is the acti
 
 ## Recommended Structure
 
-**Mobilization Fee:** $3,500
+**Mobilization Fee:** $6,000
 
 **Due:** Upon acceptance of engagement terms and before kickoff scheduling
 
